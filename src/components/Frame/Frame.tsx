@@ -3,6 +3,7 @@ import {MobileCancelMajorMonotone} from '@shopify/polaris-icons';
 import {classNames} from '@shopify/react-utilities/styles';
 import {durationSlow} from '@shopify/polaris-tokens';
 import {CSSTransition} from 'react-transition-group';
+import {noop} from '@shopify/javascript-utilities/other';
 import {navigationBarCollapsed} from '../../utilities/breakpoints';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -18,8 +19,9 @@ import {
   FrameContext,
   frameContextTypes,
   ToastProps,
+  SheetProps,
 } from './types';
-import {ToastManager, Loading, ContextualSaveBar} from './components';
+import {ToastManager, Loading, ContextualSaveBar, Sheet} from './components';
 
 import styles from './Frame.scss';
 
@@ -45,6 +47,7 @@ export interface State {
   loadingStack: number;
   toastMessages: (ToastProps & {id: string})[];
   showContextualSaveBar: boolean;
+  sheet: SheetProps;
 }
 
 export const GLOBAL_RIBBON_CUSTOM_PROPERTY = '--global-ribbon-height';
@@ -65,6 +68,7 @@ export class Frame extends React.PureComponent<CombinedProps, State> {
     toastMessages: [],
     mobileView: isMobileView(),
     showContextualSaveBar: false,
+    sheet: initializeSheet(),
   };
 
   private contextualSaveBar: ContextualSaveBarProps | null;
@@ -76,6 +80,8 @@ export class Frame extends React.PureComponent<CombinedProps, State> {
       frame: {
         showToast: this.showToast,
         hideToast: this.hideToast,
+        showSheet: this.showSheet,
+        hideSheet: this.hideSheet,
         startLoading: this.startLoading,
         stopLoading: this.stopLoading,
         setContextualSaveBar: this.setContextualSaveBar,
@@ -105,6 +111,7 @@ export class Frame extends React.PureComponent<CombinedProps, State> {
       toastMessages,
       showContextualSaveBar,
       mobileView,
+      sheet,
     } = this.state;
     const {
       children,
@@ -241,6 +248,8 @@ export class Frame extends React.PureComponent<CombinedProps, State> {
         />
       ) : null;
 
+    const sheetMarkup = <Sheet {...sheet} />;
+
     return (
       <div
         className={frameClassName}
@@ -264,10 +273,31 @@ export class Frame extends React.PureComponent<CombinedProps, State> {
         </main>
         <ToastManager toastMessages={toastMessages} />
         {globalRibbonMarkup}
+        {sheetMarkup}
         <EventListener event="resize" handler={this.handleResize} />
       </div>
     );
   }
+
+  private showSheet = (sheetProps: SheetProps) => {
+    if (this.state.sheet.open) {
+      const {open, ...rest} = this.state.sheet;
+      this.hideSheet({open: false, ...rest}, () => this.showSheet(sheetProps));
+    } else {
+      this.setState({sheet: sheetProps});
+    }
+  };
+
+  private hideSheet = (
+    sheetProps: SheetProps,
+    callback?: () => void | undefined,
+  ) => {
+    this.setState({sheet: sheetProps});
+
+    if (callback) {
+      return callback();
+    }
+  };
 
   private setGlobalRibbonHeight = () => {
     const {globalRibbonContainer} = this;
@@ -403,6 +433,14 @@ function focusAppFrameMain() {
 
 function isMobileView() {
   return navigationBarCollapsed().matches;
+}
+
+function initializeSheet(): SheetProps {
+  return {
+    open: false,
+    children: null,
+    onClose: noop,
+  };
 }
 
 export default withAppProvider<Props>()(Frame);

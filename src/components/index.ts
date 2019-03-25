@@ -139,6 +139,7 @@ export {
   ToastProps,
   DEFAULT_TOAST_DURATION,
   DEFAULT_TOAST_DURATION_WITH_ACTION,
+  SheetProps,
 } from './Frame';
 
 export {default as Heading, Props as HeadingProps} from './Heading';
@@ -231,6 +232,8 @@ export {
   default as SettingToggle,
   Props as SettingToggleProps,
 } from './SettingToggle';
+
+export {default as Sheet} from './Sheet';
 
 export {default as Spinner, Props as SpinnerProps} from './Spinner';
 

@@ -14,6 +14,8 @@ Use [the changelog guidelines](https://git.io/polaris-changelog-guidelines) to f
 
 ### New components
 
+- Added the `Sheet` component ([#1250](https://github.com/Shopify/polaris-react/pull/1250))
+
 ### Enhancements
 
 - Added an onChange handler to `CheckableButton` ([#1326](https://github.com/Shopify/polaris-react/pull/1326))

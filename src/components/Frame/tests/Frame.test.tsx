@@ -1,17 +1,20 @@
 import * as React from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {animationFrame} from '@shopify/jest-dom-mocks';
+import {noop} from '@shopify/javascript-utilities/other';
 import {mountWithAppProvider, documentHasStyle} from 'test-utilities';
 import {
   TrapFocus,
   ContextualSaveBar as PolarisContextualSavebar,
   Loading as PolarisLoading,
+  Sheet as PolarisSheet,
 } from 'components';
 import Frame from '../Frame';
 import Button from '../../Button';
 import {
   ContextualSaveBar as FrameContextualSavebar,
   Loading as FrameLoading,
+  Sheet as FrameSheet,
 } from '../components';
 import TopBar, {UserMenuProvider} from '../../TopBar';
 import Navigation from '../../Navigation';
@@ -217,6 +220,34 @@ describe('<Frame />', () => {
       </Frame>,
     );
     expect(frame.find(FrameLoading).exists()).toBe(true);
+  });
+
+  it('renders a Frame Sheet if Polaris Sheet is rendered', () => {
+    const props = {open: true, onClose: noop, children: <p>child content</p>};
+    const frame = mountWithAppProvider(
+      <Frame>
+        <PolarisSheet {...props} />
+      </Frame>,
+    );
+    const frameSheet = frame.find(FrameSheet);
+    expect(frameSheet.props()).toEqual(props);
+    expect(frameSheet.exists()).toBe(true);
+  });
+
+  it('renders a Frame Sheet if a closed Polaris Sheet is rendered', () => {
+    const props = {open: false, onClose: noop, children: <p>child content</p>};
+    const frame = mountWithAppProvider(
+      <Frame>
+        <PolarisSheet {...props} />
+      </Frame>,
+    );
+    const frameSheet = frame.find(FrameSheet);
+    expect(frameSheet.props()).toEqual({
+      open: props.open,
+      onClose: props.onClose,
+      children: null,
+    });
+    expect(frameSheet.exists()).toBe(true);
   });
 
   describe('<UserMenuProvider />', () => {

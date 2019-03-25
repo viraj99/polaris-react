@@ -12,6 +12,7 @@ export {
   FrameContext,
   frameContextTypes,
   ToastProps,
+  SheetProps,
 } from './types';
 
 export default Frame;

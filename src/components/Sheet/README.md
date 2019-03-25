@@ -1,0 +1,151 @@
+---
+name: Sheet
+category: Overlays
+platforms:
+  - web
+keywords:
+  - sheet
+---
+
+# Sheet
+
+A sheet is a large container that enters from the edge of the screen when triggered by the merchant. It’s used to provide merchants with actions and information contextual to the page. It doesn’t interrupt their flow like a modal.
+
+---
+
+## Required components
+
+The sheet component must be wrapped in the [frame](/components/structure/frame) component.
+
+---
+
+## Use in an embedded application
+
+Use of the sheet component in an embedded application is not currently supported. If this is a feature you would like to see supported by Shopify App Bridge, let us know in the [forums](https://ecommerce.shopify.com/c/shopify-apis-and-technology).
+
+---
+
+## Best practices
+
+The sheet component should:
+
+- Include a heading that summarizes the actions and information in the sheet, for example, More filters
+- Be openable through clear actions, like a link or button
+- Be close-able through clear actions, like Done, the [X] button, and the esc key
+- Include information and actions contextual to the current task
+- Not block merchants from completing their task, like a modal would
+- Not open from within another sheet (only one sheet can be open at a time)
+- Preserve its state—the settings and actions won’t reset when it’s closed
+
+---
+
+## Examples
+
+### Basic sheet
+
+<!-- example-for: web -->
+
+Use as the default option for a sheet.
+
+```jsx
+class SheetExample extends React.Component {
+  state = {
+    sheetActive: false,
+    newsletter: false,
+    email: '',
+  };
+
+  render() {
+    const theme = {
+      colors: {
+        topBar: {
+          background: '#357997',
+        },
+      },
+      logo: {
+        width: 124,
+        topBarSource:
+          'https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-color.svg?6215648040070010999',
+        contextualSaveBarSource:
+          'https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-gray.svg?6215648040070010999',
+        url: 'http://jadedpixel.com',
+        accessibilityLabel: 'Jaded Pixel',
+      },
+    };
+
+    const {sheetActive, newsletter, email} = this.state;
+    return (
+      <AppProvider theme={theme}>
+        <Frame topBar={<TopBar />}>
+          <Page title="Sheet">
+            <Card sectioned>
+              <Button onClick={this.handleToggleSheet}>
+                {sheetActive ? 'Close sheet' : 'Open sheet'}
+              </Button>
+            </Card>
+            <Sheet open={sheetActive} onClose={this.handleCloseSheet}>
+              <Form onSubmit={this.handleSubmit}>
+                <FormLayout>
+                  <Checkbox
+                    label="Sign up for the Polaris newsletter"
+                    checked={newsletter}
+                    onChange={this.handleChange('newsletter')}
+                  />
+
+                  <TextField
+                    value={email}
+                    onChange={this.handleChange('email')}
+                    label="Email"
+                    type="email"
+                    helpText={
+                      <span>
+                        We’ll use this email address to inform you on future
+                        changes to Polaris.
+                      </span>
+                    }
+                  />
+
+                  <Button submit>Submit</Button>
+                </FormLayout>
+              </Form>
+            </Sheet>
+          </Page>
+        </Frame>
+      </AppProvider>
+    );
+  }
+
+  handleOpenSheet = () => {
+    this.setState({sheetActive: true});
+  };
+
+  handleCloseSheet = () => {
+    this.setState({sheetActive: false});
+  };
+
+  handleToggleSheet = () => {
+    const {sheetActive} = this.state;
+
+    if (sheetActive) {
+      this.handleCloseSheet();
+    } else {
+      this.handleOpenSheet();
+    }
+  };
+
+  handleSubmit = (event) => {
+    this.setState({newsletter: false, email: ''});
+  };
+
+  handleChange = (field) => {
+    return (value) => this.setState({[field]: value});
+  };
+}
+```
+
+---
+
+## Related components
+
+- To offer an action before merchants can go to the next step in the flow, use the [modal component](/components/overlays/modal).
+- To present a small amount of content or a menu of actions in a non-blocking overlay, use the [popover component](/components/overlays/popover).

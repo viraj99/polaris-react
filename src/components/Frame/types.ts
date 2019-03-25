@@ -4,6 +4,8 @@ import {Action} from '../../types';
 export interface FrameManager {
   showToast(toast: {id: string} & ToastProps): void;
   hideToast(toast: {id: string}): void;
+  showSheet(sheetProps: SheetProps): void;
+  hideSheet(sheetProps: SheetProps, callback?: () => void | undefined): void;
   setContextualSaveBar(props: ContextualSaveBarProps): void;
   removeContextualSaveBar(): void;
   startLoading(): void;
@@ -66,4 +68,15 @@ export interface ToastProps {
   onDismiss(): void;
   /** Adds an action next to the message (stand-alone app use only) */
   action?: Action;
+}
+
+export interface SheetProps {
+  /** Whether or not the sheet is open */
+  open: boolean;
+  /** The child elements to render in the sheet. */
+  children: React.ReactNode;
+  /** The alternative child elements to render in the sheet at desktop sizes. */
+  desktopChildren?: React.ReactNode;
+  /** Callback when the backdrop is clicked or `ESC` is pressed */
+  onClose(): void;
 }
