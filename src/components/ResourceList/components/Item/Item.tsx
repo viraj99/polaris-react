@@ -68,7 +68,7 @@ export type CombinedProps =
       WithContextTypes<ResourceListContext>;
 
 const getUniqueCheckboxID = createUniqueIDFactory('ResourceListItemCheckbox');
-const ITEM_ID = 'ResourceList-Item-Overlay';
+const getUniqueOverlayID = createUniqueIDFactory('ResourceListItemOverlay');
 
 export class Item extends React.Component<CombinedProps, State> {
   static getDerivedStateFromProps(nextProps: CombinedProps, prevState: State) {
@@ -90,6 +90,7 @@ export class Item extends React.Component<CombinedProps, State> {
 
   private node: HTMLDivElement | null = null;
   private checkboxId = getUniqueCheckboxID();
+  private overlayId = getUniqueOverlayID();
   private buttonOverlay = React.createRef<HTMLButtonElement>();
 
   shouldComponentUpdate(nextProps: CombinedProps, nextState: State) {
@@ -262,7 +263,7 @@ export class Item extends React.Component<CombinedProps, State> {
         className={styles.Link}
         url={url}
         tabIndex={tabIndex}
-        id={ITEM_ID}
+        id={this.overlayId}
       />
     ) : (
       <button
@@ -300,7 +301,8 @@ export class Item extends React.Component<CombinedProps, State> {
   private handleFocus = (event: React.FocusEvent<HTMLElement>) => {
     if (
       event.target === this.buttonOverlay.current ||
-      (this.node && event.target === this.node.querySelector(`#${ITEM_ID}`))
+      (this.node &&
+        event.target === this.node.querySelector(`#${this.overlayId}`))
     ) {
       this.setState({focused: true, focusedInner: false});
     } else if (this.node && this.node.contains(event.target)) {
