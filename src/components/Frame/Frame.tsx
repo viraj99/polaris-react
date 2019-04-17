@@ -280,23 +280,11 @@ export class Frame extends React.PureComponent<CombinedProps, State> {
   }
 
   private showSheet = (sheetProps: SheetProps) => {
-    if (this.state.sheet.open) {
-      const {open, ...rest} = this.state.sheet;
-      this.hideSheet({open: false, ...rest}, () => this.showSheet(sheetProps));
-    } else {
-      this.setState({sheet: sheetProps});
-    }
+    this.setState({sheet: sheetProps});
   };
 
-  private hideSheet = (
-    sheetProps: SheetProps,
-    callback?: () => void | undefined,
-  ) => {
+  private hideSheet = (sheetProps: SheetProps) => {
     this.setState({sheet: sheetProps});
-
-    if (callback) {
-      return callback();
-    }
   };
 
   private setGlobalRibbonHeight = () => {

@@ -5,7 +5,7 @@ export interface FrameManager {
   showToast(toast: {id: string} & ToastProps): void;
   hideToast(toast: {id: string}): void;
   showSheet(sheetProps: SheetProps): void;
-  hideSheet(sheetProps: SheetProps, callback?: () => void | undefined): void;
+  hideSheet(sheetProps: SheetProps): void;
   setContextualSaveBar(props: ContextualSaveBarProps): void;
   removeContextualSaveBar(): void;
   startLoading(): void;
