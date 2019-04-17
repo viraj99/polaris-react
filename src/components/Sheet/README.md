@@ -25,6 +25,19 @@ Use of the sheet component in an embedded application is not currently supported
 
 ---
 
+## Accessibility
+
+Sheets provide an opportunity to let merchants dig into more detail on their current task, or access information for their current task in a different way. Although merchants may be able to see content in the sheet and the main page content at the same time, they should only be expected to interact with one or the other at any given time.
+
+### Keyboard support
+
+- Use the `onClose` prop so that the sheet can be closed with the <kbd>esc</kbd> key as well as with button-based controls
+- Use a button to open the sheet
+- When the sheet opens, move focus to it so merchants who rely on the keyboard and screen readers can access it
+- When the sheet closes, move focus back to the button that launched it
+
+---
+
 ## Best practices
 
 The sheet component should:
