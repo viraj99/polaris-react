@@ -1378,20 +1378,6 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
   integrity sha512-LAQ1d4OPfSJ/BMbI2DuizmYrrkD9JMaTdi2hQTlI53lQ4kRQPyZQRS4CYQ7O66bnBBnP/oYdRxbk++X0xuFU6A==
 
-"@percy-io/percy-storybook@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@percy-io/percy-storybook/-/percy-storybook-3.0.0-beta.0.tgz#2a6b154cf0c28c51a2fe02fac58b51537430dbb1"
-  integrity sha512-aGwbQnG6F9WoyGfYa+cU+bIFIqxUqqNFS4jI7eAkJpD2PR9wTQZNyGb/3AsK4H/2qZsOUVkyBvx4UVL50A8imQ==
-  dependencies:
-    "@percy/react-percy-api-client" "^0.4.6"
-    babel-runtime "^6.26.0"
-    debug "^3.1.0"
-    es6-error "^4.0.2"
-    es6-promise-pool "^2.4.4"
-    puppeteer "^1.4.0"
-    walk "^2.3.9"
-    yargs "^7.0.2"
-
 "@percy/react-percy-api-client@^0.4.6":
   version "0.4.6"
   resolved "https://registry.yarnpkg.com/@percy/react-percy-api-client/-/react-percy-api-client-0.4.6.tgz#e2b907c39bc0b53ce2da856aad8cec7ab03dac46"
@@ -1403,6 +1389,20 @@
     mime-types "^2.1.14"
     percy-client "^3.0.0"
     slugify "^1.1.0"
+
+"@percy/storybook@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@percy/storybook/-/storybook-3.0.1.tgz#9d08281c7b38477eefaa17119e643f08c890c7a2"
+  integrity sha512-o35H5uEcOUx0tm5CqclUklN+FVL9b98217yB3hIU8lHIL1VlLJ3Je3tO7Ct/x2X7u9rPqK7oIV+BhQPkOGjAlA==
+  dependencies:
+    "@percy/react-percy-api-client" "^0.4.6"
+    babel-runtime "^6.26.0"
+    debug "^3.1.0"
+    es6-error "^4.0.2"
+    es6-promise-pool "^2.4.4"
+    puppeteer "^1.4.0"
+    walk "^2.3.9"
+    yargs "^7.0.2"
 
 "@reach/router@^1.2.1":
   version "1.2.1"
@@ -1474,15 +1474,15 @@
     mime-types "2.1.12"
     request "2.78.0"
 
-"@shopify/polaris-icons@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@shopify/polaris-icons/-/polaris-icons-3.0.0.tgz#81e83cc8143b2bd3a95bcfb63749be3bda260399"
-  integrity sha512-T0tStoGH/8HCZgsVe+hPIIihS2zS9gjK3hkcAmt/mnZ6hduJHRuOLIjk7xxeq6j9sGL7dDThnZdlIJARabXXLw==
+"@shopify/polaris-icons@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@shopify/polaris-icons/-/polaris-icons-3.3.0.tgz#7031791d44bfe60e2f999c8fbf0ea67ab7a047c8"
+  integrity sha512-+nB2rthx6vS8vlJms5unGbThwrdGXAPMCD2PoQG/Eq5uQU1EmhkVOIFaEK7AS62J2m+HaqbLw/zrlbBkZHZUrQ==
 
-"@shopify/polaris-tokens@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@shopify/polaris-tokens/-/polaris-tokens-2.3.0.tgz#d4e6c12dd83d6f8b1501fbf415268d60151770f2"
-  integrity sha512-/jroX2KTRYrQ9Ht7xbJrU+6pEZR2Iq38mXKT6G+9VB13jOv2Yih27MmitEV71E7g03KTIntKCDOWgR/3ECTb1A==
+"@shopify/polaris-tokens@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@shopify/polaris-tokens/-/polaris-tokens-2.5.0.tgz#3efe1f9be456565bbb26f6f555c78be8060bcea7"
+  integrity sha512-AzIXOBAdUnOIO91vhCPdtQH+W6pKi4rCrXsT6Fe/BN+KUoeMAsfOyBXRbA5lSQ1pb+gA2e9N4PGpOzFs6fI4hQ==
 
 "@shopify/react-compose@^0.1.6":
   version "0.1.6"
@@ -5411,7 +5411,7 @@ core-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
-core-js@^2.0.0, core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.1, core-js@^2.5.3, core-js@^2.5.6, core-js@^2.5.7, core-js@^2.6.5:
+core-js@^2.0.0, core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.3, core-js@^2.5.6, core-js@^2.5.7, core-js@^2.6.5:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
   integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
