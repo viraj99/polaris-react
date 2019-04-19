@@ -87,6 +87,7 @@ class SheetExample extends React.Component {
     };
 
     const {sheetActive, newsletter, email} = this.state;
+
     return (
       <AppProvider theme={theme}>
         <Frame topBar={<TopBar />}>
@@ -97,30 +98,68 @@ class SheetExample extends React.Component {
               </Button>
             </Card>
             <Sheet open={sheetActive} onClose={this.handleCloseSheet}>
-              <Form onSubmit={this.handleSubmit}>
-                <FormLayout>
-                  <Checkbox
-                    label="Sign up for the Polaris newsletter"
-                    checked={newsletter}
-                    onChange={this.handleChange('newsletter')}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                }}
+              >
+                <div
+                  style={{
+                    alignItems: 'center',
+                    borderBottom: '1px solid #DFE3E8',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '1.6rem',
+                    width: '100%',
+                  }}
+                >
+                  <Heading>Sign up</Heading>
+                  <Button
+                    accessibilityLabel="Cancel"
+                    icon="cancel"
+                    onClick={this.handleCloseSheet}
+                    plain
                   />
+                </div>
+                <Scrollable style={{padding: '1.6rem', height: '100%'}}>
+                  <Form onSubmit={this.handleSubmit}>
+                    <FormLayout>
+                      <Checkbox
+                        label="Sign up for the Polaris newsletter"
+                        checked={newsletter}
+                        onChange={this.handleChange('newsletter')}
+                      />
 
-                  <TextField
-                    value={email}
-                    onChange={this.handleChange('email')}
-                    label="Email"
-                    type="email"
-                    helpText={
-                      <span>
-                        We’ll use this email address to inform you on future
-                        changes to Polaris.
-                      </span>
-                    }
-                  />
+                      <TextField
+                        value={email}
+                        onChange={this.handleChange('email')}
+                        label="Email"
+                        type="email"
+                        helpText={
+                          <span>
+                            We’ll use this email address to inform you on future
+                            changes to Polaris.
+                          </span>
+                        }
+                      />
 
-                  <Button submit>Submit</Button>
-                </FormLayout>
-              </Form>
+                      <Button submit>Submit</Button>
+                    </FormLayout>
+                  </Form>
+                </Scrollable>
+                <div
+                  style={{
+                    alignItems: 'center',
+                    borderBottom: '1px solid #DFE3E8',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '1.6rem',
+                    width: '100%',
+                  }}
+                />
+              </div>
             </Sheet>
           </Page>
         </Frame>
